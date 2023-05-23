@@ -27,6 +27,7 @@ export default function useReceiptDownload(props?: IProp) {
     },
     []
   );
+  console.log(process.env.NEXT_PUBLIC_API_URL)
 
   const onDownload = useCallback(
     async (fileName?: string, id?: string): Promise<void> => {
@@ -34,7 +35,7 @@ export default function useReceiptDownload(props?: IProp) {
         setFileID(id as string);
         setLoading(true);
         const res = await axios.post(
-          `http://localhost:3001/product/api`,
+          `${process.env.NEXT_PUBLIC_API_URL}/product/api`,
           {
             html: `<p style="color: #f00">hello my very world</p>`
           }
@@ -48,7 +49,7 @@ export default function useReceiptDownload(props?: IProp) {
         );
         setLoading(false);
       } catch (e: any) {
-        console.log("error happend");
+        console.log("error happend", e);
         setLoading(false);
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
